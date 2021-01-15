@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'info.dart';
+import 'package:camera/camera.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -29,10 +30,17 @@ class Home extends StatelessWidget {
           )
         ],
       ),
-      floatingActionButton: FloatingActionButton(onPressed: () {
-        counter++;
-        print(counter);
-      }),
+      body: Center(
+        child: Text("Click on the button to check which monke you are"),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          // Add your onPressed code here!
+        },
+        label: Text('Check'),
+        icon: Icon(Icons.camera_alt),
+        backgroundColor: Colors.pink,
+      ),
     );
   }
 }
