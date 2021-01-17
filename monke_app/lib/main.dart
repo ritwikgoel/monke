@@ -3,6 +3,7 @@ import 'package:monke_app/view.dart';
 import 'info.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
+import 'package:monke_app/decider.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -10,6 +11,7 @@ void main() {
     routes: {
       '/info': (context) => Info(),
       '/view': (context) => viewer(),
+      '/decider': (context) => finalDecider(),
     },
   ));
 }
@@ -34,8 +36,15 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blue[200],
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        title: Text("M O N K E",
+        style: TextStyle(
+          color: Colors.black,
+
+        ),),
+        centerTitle: true,
+        backgroundColor: Colors.blue[300],
         actions: [
           IconButton(
             icon: Icon(
@@ -49,7 +58,10 @@ class _HomeState extends State<Home> {
         ],
       ),
       body: Center(
-        child: Text("Click on the button to check which monke you are"),
+        child: Text("Click on the button to check which monke you are",
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+        ),),
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () async {
@@ -57,7 +69,7 @@ class _HomeState extends State<Home> {
           await getImage();
           imageFileMap[1] = _image;
           Navigator.pushNamed(context, '/view', arguments: {
-            'imgFin':_image,
+            'imgFin': _image,
           });
         },
         label: Text('Check'),
