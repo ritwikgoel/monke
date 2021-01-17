@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
+import 'dart:io';
 
+import 'package:flutter/material.dart';
 
 class viewer extends StatefulWidget {
   @override
@@ -7,12 +8,18 @@ class viewer extends StatefulWidget {
 }
 
 class _viewerState extends State<viewer> {
+  Map data = {};
+
   @override
   Widget build(BuildContext context) {
+    data = ModalRoute.of(context).settings.arguments;
+    print(data);
     return Scaffold(
       appBar: AppBar(
         title: Text("MONKE"),
       ),
+      body:
+      Image.file(data['imgFin'])
     );
   }
 }

@@ -9,7 +9,7 @@ void main() {
     home: Home(),
     routes: {
       '/info': (context) => Info(),
-      '/view':(context) =>viewer(),
+      '/view': (context) => viewer(),
     },
   ));
 }
@@ -20,6 +20,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  Map<int, File> imageFileMap = {};
   File _image;
   Future getImage() async {
     File image = await ImagePicker.pickImage(source: ImageSource.camera);
@@ -54,7 +55,10 @@ class _HomeState extends State<Home> {
         onPressed: () async {
           // Add your onPressed code here!
           await getImage();
-          Navigator.pushNamed(context, '/view',);
+          imageFileMap[1] = _image;
+          Navigator.pushNamed(context, '/view', arguments: {
+            'imgFin':_image,
+          });
         },
         label: Text('Check'),
         icon: Icon(Icons.camera_alt),
