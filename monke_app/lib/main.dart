@@ -1,18 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:monke_app/view.dart';
 import 'info.dart';
-import 'package:camera/camera.dart';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
 
 void main() {
   runApp(MaterialApp(
     home: Home(),
     routes: {
       '/info': (context) => Info(),
+      '/view':(context) =>viewer(),
     },
   ));
 }
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  File _image;
+  Future getImage() async {
+    File image = await ImagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      _image = image;
+    });
+  }
+
   int counter = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,8 +51,10 @@ class Home extends StatelessWidget {
         child: Text("Click on the button to check which monke you are"),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
+        onPressed: () async {
           // Add your onPressed code here!
+          await getImage();
+          Navigator.pushNamed(context, '/view',);
         },
         label: Text('Check'),
         icon: Icon(Icons.camera_alt),
