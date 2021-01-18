@@ -38,11 +38,12 @@ class _HomeState extends State<Home> {
     return Scaffold(
       backgroundColor: Colors.blue[200],
       appBar: AppBar(
-        title: Text("M O N K E",
-        style: TextStyle(
-          color: Colors.black,
-
-        ),),
+        title: Text(
+          "M O N K E",
+          style: TextStyle(
+            color: Colors.black,
+          ),
+        ),
         centerTitle: true,
         backgroundColor: Colors.blue[300],
         actions: [
@@ -58,19 +59,23 @@ class _HomeState extends State<Home> {
         ],
       ),
       body: Center(
-        child: Text("Click on the button to check which monke you are",
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-        ),),
+        child: Text(
+          "Click on the button to check which monke you are",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () async {
           // Add your onPressed code here!
           await getImage();
           imageFileMap[1] = _image;
-          Navigator.pushNamed(context, '/view', arguments: {
-            'imgFin': _image,
-          });
+          if (_image != null) {
+            Navigator.pushNamed(context, '/view', arguments: {
+              'imgFin': _image,
+            });
+          }
         },
         label: Text('Check'),
         icon: Icon(Icons.camera_alt),
